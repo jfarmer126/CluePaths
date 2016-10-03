@@ -71,10 +71,9 @@ public class IntBoard {
 	}
 	
 	public Set<BoardCell> getTargets(){
-		//FINISH THIS METHOD
 		Set<BoardCell> output = new HashSet<BoardCell> ();
 		
-		
+		output = targets;
 		
 		return output;
 	}

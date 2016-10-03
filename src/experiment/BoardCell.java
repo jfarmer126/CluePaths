@@ -8,7 +8,6 @@ public class BoardCell {
 	
 	
 	public BoardCell(int row, int col) {
-		super();
 		this.row = row;
 		this.col = col;
 	}
@@ -16,7 +15,7 @@ public class BoardCell {
 	
 	@Override
 	public String toString() {
-		return "BoardCell [row=" + row + ", col=" + col + "]";
+		return "[row=" + row + ", col=" + col + "]";
 	}
 
 
