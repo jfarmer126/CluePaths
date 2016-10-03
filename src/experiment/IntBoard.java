@@ -11,7 +11,9 @@ public class IntBoard {
 	
 	public IntBoard(BoardCell[][] grid, Set<BoardCell> visited) 
 	{
-		super();
+
+		visited = new HashSet<BoardCell> ();
+		targets = new HashSet<BoardCell> ();
 		this.grid = grid;
 		this.visited = visited;
 	}
@@ -29,7 +31,7 @@ public class IntBoard {
 	
 	public void calcTargets(BoardCell startcell, int pathlength)
 	{
-		Set<BoardCell> visited = new HashSet<BoardCell> ();
+		visited.clear();
 		
 		visited.add(startcell);
 		
@@ -42,6 +44,7 @@ public class IntBoard {
 	private void findAllTargets(BoardCell startcell, int numsteps)
 	{
 		Set<BoardCell> adj = getAdjList(startcell);
+		System.out.println(adj);
 		for(BoardCell cell : adj)
 		{
 			if(visited.contains(cell))
@@ -63,15 +66,15 @@ public class IntBoard {
 				}
 				
 			}
-			
 			visited.remove(cell);
 		}
 	}
 	
 	public Set<BoardCell> getTargets(){
-		
+		//FINISH THIS METHOD
 		Set<BoardCell> output = new HashSet<BoardCell> ();
-		//output.add(cell);
+		
+		
 		
 		return output;
 	}
@@ -79,7 +82,26 @@ public class IntBoard {
 	public Set<BoardCell> getAdjList(BoardCell cell){
 		
 		Set<BoardCell> output = new HashSet<BoardCell> ();
-		//output.add(cell);
+		
+		if(cell.row > 0)
+		{
+			output.add(new BoardCell(cell.row - 1, cell.col));
+		}
+		
+		if(cell.row < grid.length - 1)
+		{
+			output.add(new BoardCell(cell.row + 1, cell.col));
+		}
+		
+		if(cell.col > 0)
+		{
+			output.add(new BoardCell(cell.row, cell.col - 1));
+		}
+		
+		if(cell.col < grid[0].length - 1)
+		{
+			output.add(new BoardCell(cell.row, cell.col + 1));
+		}
 		
 		return output;
 	}
@@ -87,7 +109,6 @@ public class IntBoard {
 	public BoardCell getCell(int row, int col)
 	{
 		return grid[row][col];
-		
 	}
 	
 	
