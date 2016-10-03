@@ -29,13 +29,16 @@ public class IntBoard {
 	
 	public void calcTargets(BoardCell startcell, int pathlength)
 	{
-		visited.clear();
+		Set<BoardCell> visited = new HashSet<BoardCell> ();
+		
 		visited.add(startcell);
 		
 		findAllTargets(startcell, pathlength);
 		
 	}
 	
+
+
 	private void findAllTargets(BoardCell startcell, int numsteps)
 	{
 		Set<BoardCell> adj = getAdjList(startcell);
@@ -67,17 +70,30 @@ public class IntBoard {
 	
 	public Set<BoardCell> getTargets(){
 		
-		return null;
+		Set<BoardCell> output = new HashSet<BoardCell> ();
+		//output.add(cell);
+		
+		return output;
 	}
 	
 	public Set<BoardCell> getAdjList(BoardCell cell){
 		
-		return null;
+		Set<BoardCell> output = new HashSet<BoardCell> ();
+		//output.add(cell);
+		
+		return output;
 	}
 	
 	public BoardCell getCell(int row, int col)
 	{
 		return grid[row][col];
 		
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "IntBoard [grid=" + grid.length + " " + grid[0].length;
 	}
 }

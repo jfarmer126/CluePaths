@@ -23,7 +23,8 @@ public class TestIntBoard
 				grid[i][k] = new BoardCell(i,k);
 			}
 		}
-		IntBoard board = new IntBoard(grid,visited);
+		
+		board = new IntBoard(grid,visited);
 		
 	}
 
@@ -101,6 +102,7 @@ public class TestIntBoard
 	{
 		BoardCell cell = board.getCell(2, 2);
 		
+		
 		Set<BoardCell> testList = board.getAdjList(cell);
 		
 		assertTrue(testList.contains(board.getCell(2, 1)));
@@ -118,9 +120,7 @@ public class TestIntBoard
 		BoardCell startcell1 = board.getCell(0, 0);
 		
 		board.calcTargets(startcell1, 3);
-		Set targets = board.getTargets();
-		
-		assertEquals(6, targets.size());
+		Set<BoardCell> targets = board.getTargets();
 		
 		assertTrue(targets.contains(board.getCell(3, 0)));
 		assertTrue(targets.contains(board.getCell(2, 1)));
@@ -129,20 +129,20 @@ public class TestIntBoard
 		assertTrue(targets.contains(board.getCell(0, 3)));
 		assertTrue(targets.contains(board.getCell(1, 0)));
 		
-		
+		assertEquals(6, targets.size());
 		
 		BoardCell startcell2 = board.getCell(1, 1);
 		
 		board.calcTargets(startcell2, 1);
 		targets = board.getTargets();
 		
-		assertEquals(4, targets.size());
-		
 		assertTrue(targets.contains(board.getCell(0, 1)));
 		assertTrue(targets.contains(board.getCell(2, 1)));
 		assertTrue(targets.contains(board.getCell(1, 0)));
 		assertTrue(targets.contains(board.getCell(1, 2)));
 
+
+		assertEquals(4, targets.size());
 	}
 	
 	
