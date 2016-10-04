@@ -31,6 +31,7 @@ public class IntBoard {
 	
 	public void calcTargets(BoardCell startcell, int pathlength)
 	{
+		
 		visited.clear();
 		
 		visited.add(startcell);
@@ -43,30 +44,30 @@ public class IntBoard {
 
 	private void findAllTargets(BoardCell startcell, int numsteps)
 	{
+		
 		Set<BoardCell> adj = getAdjList(startcell);
 		System.out.println(adj);
 		for(BoardCell cell : adj)
 		{
 			if(visited.contains(cell))
 			{
-				break;
+				continue;
 			}
 			
+			if(numsteps  == 1){
+				
+				targets.add(cell);
+					
+			}	
 			else
 			{
 				visited.add(cell);
-				if(numsteps == 1)
-				{
-					targets.add(cell);
-				}
-				
-				else
-				{
-					findAllTargets(cell, numsteps - 1);
-				}
-				
+				findAllTargets(cell, numsteps - 1);
+				visited.remove(cell);
 			}
-			visited.remove(cell);
+				
+			
+			
 		}
 	}
 	

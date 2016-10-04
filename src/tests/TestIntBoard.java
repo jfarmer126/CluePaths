@@ -134,7 +134,7 @@ public class TestIntBoard
 	
 	
 	@Test
-	public void testCalcTarget()
+	public void testCalcTarget00()
 	{
 		BoardCell startcell1 = board.getCell(0, 0);
 		
@@ -150,11 +150,15 @@ public class TestIntBoard
 		assertTrue(targets.contains(board.getCell(1, 0)));
 		
 		assertEquals(6, targets.size());
+	}
+	
+	@Test
+	public void testCalcTarget11(){
 		
 		BoardCell startcell2 = board.getCell(1, 1);
-		
 		board.calcTargets(startcell2, 1);
-		targets = board.getTargets();
+		
+		Set<BoardCell> targets = board.getTargets();
 		
 		assertTrue(targets.contains(board.getCell(0, 1)));
 		assertTrue(targets.contains(board.getCell(2, 1)));
@@ -163,6 +167,8 @@ public class TestIntBoard
 
 
 		assertEquals(4, targets.size());
+		
+		
 	}
 	
 	
