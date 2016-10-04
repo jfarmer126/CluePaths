@@ -1,10 +1,11 @@
-package experiment;
+package clueGame;
 	
 public class BoardCell {
 
 
-	int row;
-	int col;
+	public int row;
+	public int col;
+	char initial;
 	
 	
 	public BoardCell(int row, int col) {
@@ -25,7 +26,7 @@ public class BoardCell {
 		int result = 1;
 		result = prime * result + col;
 		result = prime * result + row;
-		return result;
+		return result;   
 	}
 
 
@@ -43,6 +44,30 @@ public class BoardCell {
 		if (row != other.row)
 			return false;
 		return true;
+	}
+	
+	public boolean isWalkway(){
+		return true;
+	}
+	
+	public boolean isRoom(){
+		return true;
+	}
+	
+	public boolean isDoorway(){
+		return true;
+	}
+
+
+	public Object getDoorDirection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public char getInitial() {
+		// TODO Auto-generated method stub
+		return 'a';
 	}
 
 
