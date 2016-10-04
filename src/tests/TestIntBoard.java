@@ -115,7 +115,7 @@ public class TestIntBoard
 		System.out.println(testList.contains(board.getCell(1, 2)));
 		System.out.println(testList.contains(testCell));
 		System.out.println(testList.containsAll(board.getAdjList(cell))); 
-		//Dont understand how it doesnt contain the collection that initializes this very object
+		//Dont understand how it doesn't contain the collection that initializes this very object
 
 		//testList contains correct values, getCell returns correct value,
 		//testList contains correct amount of objects (passes the assertEquals test)
