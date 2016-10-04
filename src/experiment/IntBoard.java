@@ -46,7 +46,6 @@ public class IntBoard {
 	{
 		
 		Set<BoardCell> adj = getAdjList(startcell);
-		System.out.println(adj);
 		for(BoardCell cell : adj)
 		{
 			if(visited.contains(cell))

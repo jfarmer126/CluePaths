@@ -104,26 +104,10 @@ public class TestIntBoard
 	{
 		BoardCell cell = board.getCell(2, 2);
 		
-		
-		//Set<BoardCell> testList = new HashSet<BoardCell>();
 		Set <BoardCell> testList = board.getAdjList(cell);
 		
 		BoardCell testCell = board.getCell(1, 2);
 		
-		System.out.println(testList);
-		
-		System.out.println(testList.contains(board.getCell(1, 2)));
-		System.out.println(testList.contains(testCell));
-		System.out.println(testList.containsAll(board.getAdjList(cell))); 
-		//Dont understand how it doesn't contain the collection that initializes this very object
-
-		//testList contains correct values, getCell returns correct value,
-		//testList contains correct amount of objects (passes the assertEquals test)
-		//HOWEVER *using the testList.contains method returns false*;
-		//most likely similar errors in other tests; once these errors are resolved, will most likely
-		//be just fixing the findingAllTargets method (testCalcTarget)
-		
-		//*****you can right-click testMiddleGridAdj in the JUnit tab to run just this test******
 		assertTrue(testList.contains(board.getCell(2, 1)));
 		assertTrue(testList.contains(board.getCell(2, 3)));
 		assertTrue(testList.contains(board.getCell(1, 2)));
