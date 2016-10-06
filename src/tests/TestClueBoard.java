@@ -37,7 +37,7 @@ public class TestClueBoard {
 		assertEquals("Closet", legend.get('X'));
 		assertEquals("Kitchen", legend.get('K'));
 		assertEquals("Ballroom", legend.get('B'));
-		assertEquals("Billiard room", legend.get('R'));
+		assertEquals("Billiard Room", legend.get('R'));
 		assertEquals("Library", legend.get('L'));
 		assertEquals("Research Room", legend.get('E'));
 		assertEquals("Green Room", legend.get('G'));

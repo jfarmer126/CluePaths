@@ -1,0 +1,11 @@
+X, Closet, Other
+K, Kitchen, Card
+B, Ballroom, Card
+R, Billiard Room, Card
+L, Library, Card
+E, Research Room, Card
+G, Green Room, Card
+D, Bedroom, Card
+T, Theater, Card
+O, Workout Room, Card
+W, Walkway, Other
