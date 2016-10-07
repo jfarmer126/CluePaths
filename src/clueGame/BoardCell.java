@@ -8,15 +8,16 @@ public class BoardCell {
 	char initial;
 	
 	
-	public BoardCell(int row, int col) {
+	public BoardCell(int row, int col, char initial) {
 		this.row = row;
 		this.col = col;
+		this.initial = initial;
 	}
 	
 	
 	@Override
 	public String toString() {
-		return "[row=" + row + ", col=" + col + "]";
+		return "[row=" + row + ", col=" + col + "char=" + initial + "]";
 	}
 
 
@@ -47,11 +48,24 @@ public class BoardCell {
 	}
 	
 	public boolean isWalkway(){
-		return true;
+		
+		if(initial == 'w')
+		{
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public boolean isRoom(){
-		return true;
+		
+		if(initial != 'w')
+		{
+			if
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public boolean isDoorway(){
@@ -67,7 +81,7 @@ public class BoardCell {
 
 	public char getInitial() {
 		// TODO Auto-generated method stub
-		return 'a';
+		return initial;
 	}
 
 

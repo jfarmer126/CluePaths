@@ -19,7 +19,7 @@ public class TestClueBoard {
 	public static final int NUM_COLUMNS = 23;
 	
 	@BeforeClass
-	public static void setUp() throws Exception {
+	public static void setUp() {
 		board = Board.getInstance();
 		board.setConfigFiles("cluelayout.csv", "legend.txt");
 		board.initialize();
@@ -50,6 +50,7 @@ public class TestClueBoard {
 	@Test
 	public void testBoardDimensions() {
 		// Ensure we have the proper number of rows and columns
+		System.out.println(board);
 		assertEquals(NUM_ROWS, board.getNumRows());
 		assertEquals(NUM_COLUMNS, board.getNumColumns());		
 	}

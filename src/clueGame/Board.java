@@ -13,26 +13,39 @@ public class Board {
 	public String boardConfigFile;
 	public String roomConfigFile;
 
+	
+	
 	private Set<BoardCell> visited;
-	private BoardCell[][] grid;
+	public BoardCell[][] grid;		//CHANGE TO PRIVATE
 	private Map<Character, String> rooms;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
+	
 	// ctor is private to ensure only one can be created
 	private Board() 
 	{
 		
 	}
+	
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
-
 	}
 
-	public void initialize() throws FileNotFoundException{
-		loadRoomConfig();
-		loadBoardConfig();
+	public void initialize(){
+		try {
+			loadRoomConfig();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			loadBoardConfig();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void loadRoomConfig() throws FileNotFoundException
@@ -49,9 +62,6 @@ public class Board {
 		
 			rooms.put(c,name);
 			
-			System.out.println(c);
-			System.out.println(name);
-			
 			input.nextLine();
 		}
 		
@@ -60,31 +70,40 @@ public class Board {
 	public void loadBoardConfig() throws FileNotFoundException
 	{
 		FileReader fr = new FileReader(boardConfigFile);
-		Scanner input = new Scanner(fr);
+		Scanner inputrow = new Scanner(fr);
+		Scanner inputcol;
+		
+		grid = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 		
 		int row = 0;
-		while(input.hasNextLine())
+		while(inputrow.hasNextLine())
 		{
-
-			StringTokenizer s = new StringTokenizer(input.nextLine());
-			
+	
 			int column = 0;
+			inputcol = new Scanner(inputrow.nextLine()).useDelimiter(",");
 			
-			while(s.hasMoreTokens())
+			while(inputcol.hasNext())
 			{
-				
-				grid[row][column]= new BoardCell(row,column);
+				grid[row][column]= new BoardCell(row,column, inputcol.next().charAt(0));
 				column++;
 			}
 			
-			
+			if(numColumns == 0)
+			{
+				numColumns = column;
+			}
 			row++;
 		}
+		
+		
+		numRows = row;
+		
+		//System.out.println(row);
+		//inputrow.close();
 	}
 
 	public void calcAdjacencies()
 	{
-
 		for(BoardCell[] row : grid)
 		{
 			for(BoardCell column: row)
@@ -99,22 +118,22 @@ public class Board {
 
 		if(cell.row > 0)
 		{
-			output.add(new BoardCell(cell.row - 1, cell.col));
+			output.add(grid[cell.row - 1][cell.col]);
 		}
 
 		if(cell.row < grid.length - 1)
 		{
-			output.add(new BoardCell(cell.row + 1, cell.col));
+			output.add(grid[cell.row + 1][cell.col]);
 		}
 
 		if(cell.col > 0)
 		{
-			output.add(new BoardCell(cell.row, cell.col - 1));
+			output.add(grid[cell.row][cell.col - 1]);
 		}
 
 		if(cell.col < grid[0].length - 1)
 		{
-			output.add(new BoardCell(cell.row, cell.col + 1));
+			output.add(grid[cell.row][cell.col + 1]);
 		}
 
 		return output;
@@ -123,14 +142,11 @@ public class Board {
 	public void calcTargets(BoardCell cell, int PathLength)
 	{	
 		visited.clear();
-
 		visited.add(cell);
-
 		findAllTargets(cell, PathLength);
 	}
 
 	private void findAllTargets(BoardCell startcell, int pathLength) {
-
 		Set<BoardCell> adj = getAdjList(startcell);
 		for(BoardCell cell : adj)
 		{
@@ -150,17 +166,11 @@ public class Board {
 				findAllTargets(cell, pathLength - 1);
 				visited.remove(cell);
 			}
-
-
-
 		}
-
 	}
-	public void setConfigFiles(String string, String string2) {
-
-		boardConfigFile = string;
-		roomConfigFile = string2;
-
+	public void setConfigFiles(String inputboard, String inputroom) {
+		boardConfigFile = inputboard;
+		roomConfigFile = inputroom;
 	}
 
 	public Map<Character, String> getLegend()
@@ -169,15 +179,13 @@ public class Board {
 	}
 	public int getNumRows()
 	{
-		// TODO Auto-generated method stub
 		return numRows;
 	}
 	public int getNumColumns() {
-		// TODO Auto-generated method stub
 		return numColumns;
 	}
-	public BoardCell getCellAt(int i, int j) {
-		// TODO Auto-generated method stub
+	public BoardCell getCellAt(int i, int j) 
+	{
 		BoardCell output = grid[i][j];
 		return output;
 	}

@@ -84,24 +84,25 @@ public class IntBoard {
 		
 		Set<BoardCell> output = new HashSet<BoardCell> ();
 		
+
 		if(cell.row > 0)
 		{
-			output.add(new BoardCell(cell.row - 1, cell.col));
+			output.add(grid[cell.row - 1][cell.col]);
 		}
-		
+
 		if(cell.row < grid.length - 1)
 		{
-			output.add(new BoardCell(cell.row + 1, cell.col));
+			output.add(grid[cell.row + 1][cell.col]);
 		}
-		
+
 		if(cell.col > 0)
 		{
-			output.add(new BoardCell(cell.row, cell.col - 1));
+			output.add(grid[cell.row][cell.col - 1]);
 		}
-		
+
 		if(cell.col < grid[0].length - 1)
 		{
-			output.add(new BoardCell(cell.row, cell.col + 1));
+			output.add(grid[cell.row][cell.col + 1]);
 		}
 		
 		return output;

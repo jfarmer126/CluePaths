@@ -8,4 +8,4 @@ G, Green Room, Card
 D, Bedroom, Card
 T, Theater, Card
 O, Workout Room, Card
-w, Walkway, Other
+W, Walkway, Other
