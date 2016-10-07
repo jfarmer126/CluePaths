@@ -118,6 +118,7 @@ public class TestClueBoard {
 		// Test a walkway
 		assertEquals('W', board.getCellAt(13, 4).getInitial());
 		// Test the closet
+		System.out.println(board.getCellAt(10, 10));
 		assertEquals('X', board.getCellAt(10,10).getInitial());
 	}
 

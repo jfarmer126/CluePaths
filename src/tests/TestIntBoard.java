@@ -24,7 +24,7 @@ public class TestIntBoard
 		grid = new BoardCell[ROWS][COLS];
 		for(int i = 0; i < ROWS; i++){
 			for(int k = 0; k < COLS; k++){
-				grid[i][k] = new BoardCell(i,k,' ');
+				grid[i][k] = new BoardCell(i,k,' ', 'X');
 			}
 		}
 		

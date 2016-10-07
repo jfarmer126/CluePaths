@@ -82,7 +82,6 @@ public class CR_FileInitTests {
 		// Test that walkways are not doors
 		BoardCell cell = board.getCellAt(0, 6);
 		assertFalse(cell.isDoorway());		
-
 	}
 	
 	// Test that we have the correct number of doors

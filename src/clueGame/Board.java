@@ -12,7 +12,6 @@ public class Board {
 	public Set<BoardCell> targets;
 	public String boardConfigFile;
 	public String roomConfigFile;
-
 	
 	
 	private Set<BoardCell> visited;
@@ -46,6 +45,8 @@ public class Board {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	public void loadRoomConfig() throws FileNotFoundException
@@ -84,7 +85,16 @@ public class Board {
 			
 			while(inputcol.hasNext())
 			{
-				grid[row][column]= new BoardCell(row,column, inputcol.next().charAt(0));
+				String s = inputcol.next();
+				char d = 'X';
+				if(s.length() > 1)
+				{
+					d = s.charAt(1);
+				}
+				
+				BoardCell bc = new BoardCell(row,column, s.charAt(0), d);
+				
+				grid[row][column]= bc;
 				column++;
 			}
 			
