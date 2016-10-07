@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -50,7 +49,6 @@ public class TestClueBoard {
 	@Test
 	public void testBoardDimensions() {
 		// Ensure we have the proper number of rows and columns
-		System.out.println(board);
 		assertEquals(NUM_ROWS, board.getNumRows());
 		assertEquals(NUM_COLUMNS, board.getNumColumns());		
 	}
@@ -118,7 +116,6 @@ public class TestClueBoard {
 		// Test a walkway
 		assertEquals('W', board.getCellAt(13, 4).getInitial());
 		// Test the closet
-		System.out.println(board.getCellAt(10, 10));
 		assertEquals('X', board.getCellAt(10,10).getInitial());
 	}
 

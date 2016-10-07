@@ -13,9 +13,9 @@ public class Board {
 	public String boardConfigFile;
 	public String roomConfigFile;
 	
-	
+	private boolean properRoomConfig = false;
 	private Set<BoardCell> visited;
-	public BoardCell[][] grid;		//CHANGE TO PRIVATE
+	private BoardCell[][] grid;		//CHANGE TO PRIVATE
 	private Map<Character, String> rooms;
 
 	// variable used for singleton pattern
@@ -33,28 +33,39 @@ public class Board {
 	}
 
 	public void initialize(){
-		try {
+		rooms = new HashMap<Character, String>();
+		grid = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
+		
+		try 
+		{
+			properRoomConfig = true;
 			loadRoomConfig();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		}
+		catch (Exception e) {
+			System.out.println(e);
 		}
 		
 		
-		try {
+		try 
+		{
 			loadBoardConfig();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		} 
+		catch (Exception e) {
+			System.out.println(e);
 		}
 		
 		
 	}
 
-	public void loadRoomConfig() throws FileNotFoundException
+	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException
 	{
+		if(!properRoomConfig)
+		{
+			throw new BadConfigFormatException("Room already loaded");
+		}
+		
 		FileReader fr = new FileReader(roomConfigFile);
 		Scanner input = new Scanner(fr).useDelimiter(", ");
-		
-		rooms = new HashMap<Character, String>();
 		
 		while(input.hasNext())
 		{
@@ -68,13 +79,11 @@ public class Board {
 		
 	}
 
-	public void loadBoardConfig() throws FileNotFoundException
+	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException
 	{
 		FileReader fr = new FileReader(boardConfigFile);
 		Scanner inputrow = new Scanner(fr);
 		Scanner inputcol;
-		
-		grid = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 		
 		int row = 0;
 		while(inputrow.hasNextLine())
@@ -107,9 +116,7 @@ public class Board {
 		
 		
 		numRows = row;
-		
-		//System.out.println(row);
-		//inputrow.close();
+		inputrow.close();
 	}
 
 	public void calcAdjacencies()
@@ -200,19 +207,5 @@ public class Board {
 		return output;
 	}
 	
-	
-	
-	
-	
-	/*public static int main (String args[]) throws FileNotFoundException
-	{
-
-		Board board = Board.getInstance();
-		board.setConfigFiles("cluelayout.csv", "legend.txt");
-		board.loadRoomConfig();
-		
-		return 0;*/
-		
-	//}
 
 }

@@ -2,7 +2,6 @@ package tests;
 import experiment.*;
 import static org.junit.Assert.*;
 
-import java.util.HashSet;
 import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
@@ -107,8 +106,6 @@ public class TestIntBoard
 		BoardCell cell = board.getCell(2, 2);
 		
 		Set <BoardCell> testList = board.getAdjList(cell);
-		
-		BoardCell testCell = board.getCell(1, 2);
 		
 		assertTrue(testList.contains(board.getCell(2, 1)));
 		assertTrue(testList.contains(board.getCell(2, 3)));
