@@ -2,8 +2,6 @@ package clueGame;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 
 public class BadConfigFormatException extends Exception {
 	private static final long serialVersionUID = 1L;

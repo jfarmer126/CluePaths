@@ -35,6 +35,8 @@ public class Board {
 	public void initialize(){
 		rooms = new HashMap<Character, String>();
 		grid = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
+		visited = new HashSet<BoardCell>();
+		targets = new HashSet<BoardCell>();
 		
 		try 
 		{
@@ -119,18 +121,10 @@ public class Board {
 		inputrow.close();
 	}
 
-	public void calcAdjacencies()
-	{
-		for(BoardCell[] row : grid)
-		{
-			for(BoardCell column: row)
-			{
-				adjMatrix.put(column, getAdjList(column));
-			}
-		}
-	}
 
-	private Set<BoardCell> getAdjList(BoardCell cell) {
+	public Set<BoardCell> getAdjList(int boardRow, int boardCol) {
+		BoardCell cell = getCellAt(boardRow, boardCol);
+		
 		Set<BoardCell> output = new HashSet<BoardCell> ();
 
 		if(cell.row > 0)
@@ -156,15 +150,15 @@ public class Board {
 		return output;
 	}
 	
-	public void calcTargets(BoardCell cell, int PathLength)
+	public void calcTargets(int boardRow, int boardCol, int PathLength)
 	{	
 		visited.clear();
-		visited.add(cell);
-		findAllTargets(cell, PathLength);
+		visited.add(getCellAt(boardRow,boardCol));
+		findAllTargets(boardRow, boardCol, PathLength);
 	}
 
-	private void findAllTargets(BoardCell startcell, int pathLength) {
-		Set<BoardCell> adj = getAdjList(startcell);
+	private void findAllTargets(int boardRow, int boardCol, int pathLength) {
+		Set<BoardCell> adj = getAdjList(boardRow, boardCol);
 		for(BoardCell cell : adj)
 		{
 			if(visited.contains(cell))
@@ -180,7 +174,7 @@ public class Board {
 			else
 			{
 				visited.add(cell);
-				findAllTargets(cell, pathLength - 1);
+				findAllTargets(boardRow, boardCol, pathLength - 1);
 				visited.remove(cell);
 			}
 		}
@@ -207,19 +201,9 @@ public class Board {
 		return output;
 	}
 
-	public Set<BoardCell> getAdjList(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void calcTargets(int i, int j, int k) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Set<BoardCell> getTargets() {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<BoardCell> getTargets() 
+	{
+		return targets;
 	}
 	
 
