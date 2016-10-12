@@ -230,7 +230,7 @@ public class Board {
 				continue;
 			}
 
-			if(pathLength  == 1)
+			if(pathLength  == 1 || cell.isDoorway())
 			{
 				targets.add(cell);
 
