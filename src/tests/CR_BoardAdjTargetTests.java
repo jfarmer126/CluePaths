@@ -118,7 +118,6 @@ public class CR_BoardAdjTargetTests {
 	{
 		// Test on top edge of board, just one walkway piece
 		Set<BoardCell> testList = board.getAdjList(0, 4);
-		//System.out.println(testList);
 		assertTrue(testList.contains(board.getCellAt(0, 5)));
 		assertEquals(1, testList.size());
 		
@@ -235,9 +234,6 @@ public class CR_BoardAdjTargetTests {
 	public void testTargetsSixSteps() {
 		board.calcTargets(14, 0, 6);
 		Set<BoardCell> targets= board.getTargets();
-		
-		System.out.println(targets); //can see the missing target when closer, no issue with adjList
-									 //???????
 	
 		
 		assertEquals(7, targets.size());
@@ -247,7 +243,7 @@ public class CR_BoardAdjTargetTests {
 		assertTrue(targets.contains(board.getCellAt(14, 4)));	
 		assertTrue(targets.contains(board.getCellAt(15, 1)));	
 		assertTrue(targets.contains(board.getCellAt(14, 2)));	
-		assertTrue(targets.contains(board.getCellAt(13, 4)));	//missing
+		assertTrue(targets.contains(board.getCellAt(13, 4)));
 	}	
 	
 	// Test getting into a room
@@ -279,8 +275,6 @@ public class CR_BoardAdjTargetTests {
 	{
 		board.calcTargets(12, 7, 3);
 		Set<BoardCell> targets= board.getTargets();
-		
-		//System.out.println(targets);
 		
 		assertEquals(12, targets.size());
 		// directly up and down
