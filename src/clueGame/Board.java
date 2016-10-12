@@ -124,9 +124,18 @@ public class Board {
 
 	public Set<BoardCell> getAdjList(int boardRow, int boardCol) {
 		BoardCell cell = getCellAt(boardRow, boardCol);
-
+		
 		Set<BoardCell> output = new HashSet<BoardCell> ();
 
+		if(cell.getInitial() != 'W')
+		{
+			if(!cell.isDoorway())
+			{
+				return output;
+			}
+			
+		}
+		
 		if(cell.row > 0)
 		{
 			if(grid[cell.row -1][cell.col].getInitial() == 'W' ||
@@ -135,9 +144,10 @@ public class Board {
 				output.add(grid[cell.row - 1][cell.col]);
 			}
 		}
-
-		if(cell.row < grid.length - 1)
+		
+		if(grid[cell.row +1][cell.col] != null)
 		{
+			
 			if(grid[cell.row +1][cell.col].getInitial() == 'W' ||
 					grid[cell.row +1][cell.col].dir == DoorDirection.UP)
 			{
@@ -154,7 +164,7 @@ public class Board {
 			}
 		}
 
-		if(cell.col < grid[0].length - 1)
+		if(grid[cell.row][cell.col + 1] != null)
 		{
 			if(grid[cell.row][cell.col + 1].getInitial() == 'W' ||
 					grid[cell.row][cell.col + 1].dir == DoorDirection.LEFT)
@@ -162,7 +172,7 @@ public class Board {
 				output.add(grid[cell.row][cell.col + 1]);
 			}
 		}
-
+		
 		return output;
 	}
 

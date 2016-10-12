@@ -21,7 +21,7 @@ public class BoardCell {
 
 	@Override
 	public String toString() {
-		return "[row=" + row + ", col=" + col + "char=" + initial + "]";
+		return "[row=" + row + ", col=" + col + ", char=" + initial + "]";
 	}
 
 
