@@ -279,6 +279,9 @@ public class CR_BoardAdjTargetTests {
 	{
 		board.calcTargets(12, 7, 3);
 		Set<BoardCell> targets= board.getTargets();
+		
+		//System.out.println(targets);
+		
 		assertEquals(12, targets.size());
 		// directly up and down
 		assertTrue(targets.contains(board.getCellAt(15, 7)));
@@ -294,7 +297,7 @@ public class CR_BoardAdjTargetTests {
 		// right then up
 		assertTrue(targets.contains(board.getCellAt(10, 8)));
 		// into the rooms
-		assertTrue(targets.contains(board.getCellAt(11, 6)));
+		assertTrue(targets.contains(board.getCellAt(11, 6))); //missing
 		assertTrue(targets.contains(board.getCellAt(10, 6)));		
 		// 
 		assertTrue(targets.contains(board.getCellAt(11, 7)));		

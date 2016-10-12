@@ -5,17 +5,16 @@ import java.io.FileReader;
 import java.util.*;
 
 public class Board {
-	int numRows;
-	int numColumns;
+	private int numRows;
+	private int numColumns;
 	final static int MAX_BOARD_SIZE=50;
-	public Map<BoardCell, Set<BoardCell>> adjMatrix;
-	public Set<BoardCell> targets;
-	public String boardConfigFile;
-	public String roomConfigFile;
+	private Set<BoardCell> targets;
+	private String boardConfigFile;
+	private String roomConfigFile;
 
 	private boolean properRoomConfig = false;
 	private Set<BoardCell> visited;
-	private BoardCell[][] grid;		//CHANGE TO PRIVATE
+	private BoardCell[][] grid;
 	private Map<Character, String> rooms;
 
 	// variable used for singleton pattern
@@ -124,56 +123,54 @@ public class Board {
 
 	public Set<BoardCell> getAdjList(int boardRow, int boardCol) {
 		BoardCell cell = getCellAt(boardRow, boardCol);
-		
+
 		Set<BoardCell> output = new HashSet<BoardCell> ();
 
 		if(cell.getInitial() != 'W')
 		{
-			if(!cell.isDoorway())
+
+			DoorDirection d = cell.getDoorDirection();
+
+			switch (d)
 			{
-				return output;
-			}
-			
-			else
-			{
-				DoorDirection d = cell.getDoorDirection();
-				
-				switch (d)
+
+			case NONE:
+				break;
+
+			case UP:
+				if(grid[cell.row - 1][cell.col].getInitial() == 'W')
 				{
-					case UP:
-						if(grid[cell.row - 1][cell.col].getInitial() == 'W')
-						{
-							output.add(grid[cell.row - 1][cell.col]);
-						}
-						break;
-						
-					case DOWN:
-						if(grid[cell.row + 1][cell.col].getInitial() == 'W')
-						{
-							output.add(grid[cell.row + 1][cell.col]);
-						}
-						break;
-						
-					case LEFT:
-						if(grid[cell.row][cell.col - 1].getInitial() == 'W')
-						{
-							output.add(grid[cell.row][cell.col - 1]);
-						}
-						break;
-						
-					case RIGHT: 
-						if(grid[cell.row][cell.col + 1].getInitial() == 'W')
-						{
-							output.add(grid[cell.row][cell.col + 1]);
-						}
-						break;
+					output.add(grid[cell.row - 1][cell.col]);
 				}
-				
-				return output;
+				break;
+
+			case DOWN:
+				if(grid[cell.row + 1][cell.col].getInitial() == 'W')
+				{
+					output.add(grid[cell.row + 1][cell.col]);
+				}
+				break;
+
+			case LEFT:
+				if(grid[cell.row][cell.col - 1].getInitial() == 'W')
+				{
+					output.add(grid[cell.row][cell.col - 1]);
+				}
+				break;
+
+			case RIGHT: 
+				if(grid[cell.row][cell.col + 1].getInitial() == 'W')
+				{
+					output.add(grid[cell.row][cell.col + 1]);
+				}
+				break;
 			}
-			
+
+			return output;
+
+
 		}
-		
+
 		if(cell.row > 0)
 		{
 			if(grid[cell.row -1][cell.col].getInitial() == 'W' ||
@@ -182,10 +179,10 @@ public class Board {
 				output.add(grid[cell.row - 1][cell.col]);
 			}
 		}
-		
+
 		if(grid[cell.row +1][cell.col] != null)
 		{
-			
+
 			if(grid[cell.row +1][cell.col].getInitial() == 'W' ||
 					grid[cell.row +1][cell.col].dir == DoorDirection.UP)
 			{
@@ -210,7 +207,7 @@ public class Board {
 				output.add(grid[cell.row][cell.col + 1]);
 			}
 		}
-		
+
 		return output;
 	}
 
@@ -218,14 +215,14 @@ public class Board {
 	{	
 		targets.clear();
 		visited.clear();
-		
+
 		visited.add(getCellAt(boardRow,boardCol));
 		findAllTargets(boardRow, boardCol, PathLength);
 	}
 
 	private void findAllTargets(int boardRow, int boardCol, int pathLength) {
 		Set<BoardCell> adj = getAdjList(boardRow, boardCol);
-
+		
 		for(BoardCell cell : adj)
 		{
 			if(visited.contains(cell))
@@ -238,6 +235,7 @@ public class Board {
 				targets.add(cell);
 
 			}	
+			
 			else
 			{
 				visited.add(cell);
@@ -245,9 +243,9 @@ public class Board {
 				visited.remove(cell);
 			}
 		}
-		
+
 	}
-	
+
 	public void setConfigFiles(String inputboard, String inputroom) {
 		boardConfigFile = inputboard;
 		roomConfigFile = inputroom;
