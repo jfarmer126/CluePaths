@@ -61,8 +61,6 @@ public class CR_BoardAdjTargetTests {
 	{
 		// TEST DOORWAY RIGHT 
 		Set<BoardCell> testList = board.getAdjList(11, 6);
-		System.out.println(board.getCellAt(11, 6));
-		System.out.println(board.getCellAt(11, 7));
 		assertEquals(1, testList.size());
 		assertTrue(testList.contains(board.getCellAt(11, 7)));
 		// TEST DOORWAY LEFT 
