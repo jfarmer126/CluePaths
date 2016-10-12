@@ -235,7 +235,10 @@ public class CR_BoardAdjTargetTests {
 	public void testTargetsSixSteps() {
 		board.calcTargets(14, 0, 6);
 		Set<BoardCell> targets= board.getTargets();
-		System.out.println(targets);
+		
+		System.out.println(targets); //can see the missing target when closer, no issue with adjList
+									 //???????
+	
 		
 		assertEquals(7, targets.size());
 		assertTrue(targets.contains(board.getCellAt(14, 6)));
@@ -244,7 +247,7 @@ public class CR_BoardAdjTargetTests {
 		assertTrue(targets.contains(board.getCellAt(14, 4)));	
 		assertTrue(targets.contains(board.getCellAt(15, 1)));	
 		assertTrue(targets.contains(board.getCellAt(14, 2)));	
-		assertTrue(targets.contains(board.getCellAt(13, 4)));	
+		assertTrue(targets.contains(board.getCellAt(13, 4)));	//missing
 	}	
 	
 	// Test getting into a room

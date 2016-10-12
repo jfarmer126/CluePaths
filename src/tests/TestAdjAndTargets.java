@@ -41,10 +41,10 @@ public class TestAdjAndTargets {
 	public void testEdgePieces(){
 		
 		//test left edge
-		Set<BoardCell> testList = board.getAdjList(9, 0);
-		assertTrue(testList.contains(board.getCellAt(8, 0)));
-		assertTrue(testList.contains(board.getCellAt(10, 0)));
-		assertTrue(testList.contains(board.getCellAt(9, 1)));
+		Set<BoardCell> testList = board.getAdjList(5, 0);
+		assertTrue(testList.contains(board.getCellAt(4, 0)));
+		assertTrue(testList.contains(board.getCellAt(6, 0)));
+		assertTrue(testList.contains(board.getCellAt(5, 1)));
 		
 		//test right edge
 		testList = board.getAdjList(10, 22);
@@ -53,10 +53,8 @@ public class TestAdjAndTargets {
 		assertTrue(testList.contains(board.getCellAt(10, 21)));
 		
 		//test bottom edge
-		testList = board.getAdjList(21, 15);
-		assertTrue(testList.contains(board.getCellAt(21, 14)));
-		assertTrue(testList.contains(board.getCellAt(21, 16)));
-		assertTrue(testList.contains(board.getCellAt(20, 15)));
+		testList = board.getAdjList(21, 13);
+		assertTrue(testList.contains(board.getCellAt(20, 13)));
 		
 		//test top edge
 		testList = board.getAdjList(0, 12);
@@ -114,6 +112,7 @@ public class TestAdjAndTargets {
 	public void testDoorways(){
 		//Test UP
 		Set<BoardCell> testList = board.getAdjList(14, 2);
+		
 		assertEquals(1,testList.size());
 		assertTrue(testList.contains(board.getCellAt(13, 2)));
 		
@@ -126,7 +125,7 @@ public class TestAdjAndTargets {
 		//Test LEFT
 		testList = board.getAdjList(13, 14);
 		assertEquals(1,testList.size());
-		assertTrue(testList.contains(board.getCellAt(14, 13)));
+		assertTrue(testList.contains(board.getCellAt(13, 13)));
 		
 		//Test DOWN
 		testList = board.getAdjList(8, 15);

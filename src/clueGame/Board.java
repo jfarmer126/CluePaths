@@ -134,6 +134,44 @@ public class Board {
 				return output;
 			}
 			
+			else
+			{
+				DoorDirection d = cell.getDoorDirection();
+				
+				switch (d)
+				{
+					case UP:
+						if(grid[cell.row - 1][cell.col].getInitial() == 'W')
+						{
+							output.add(grid[cell.row - 1][cell.col]);
+						}
+						break;
+						
+					case DOWN:
+						if(grid[cell.row + 1][cell.col].getInitial() == 'W')
+						{
+							output.add(grid[cell.row + 1][cell.col]);
+						}
+						break;
+						
+					case LEFT:
+						if(grid[cell.row][cell.col - 1].getInitial() == 'W')
+						{
+							output.add(grid[cell.row][cell.col - 1]);
+						}
+						break;
+						
+					case RIGHT: 
+						if(grid[cell.row][cell.col + 1].getInitial() == 'W')
+						{
+							output.add(grid[cell.row][cell.col + 1]);
+						}
+						break;
+				}
+				
+				return output;
+			}
+			
 		}
 		
 		if(cell.row > 0)
@@ -207,6 +245,7 @@ public class Board {
 				visited.remove(cell);
 			}
 		}
+		
 	}
 	
 	public void setConfigFiles(String inputboard, String inputroom) {

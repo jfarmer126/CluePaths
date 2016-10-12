@@ -106,7 +106,7 @@ public class BoardCell {
 		}
 	}
 
-	public Object getDoorDirection() {
+	public DoorDirection getDoorDirection() {
 		return dir;
 	}
 
