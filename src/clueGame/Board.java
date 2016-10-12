@@ -178,14 +178,15 @@ public class Board {
 
 	public void calcTargets(int boardRow, int boardCol, int PathLength)
 	{	
+		targets.clear();
 		visited.clear();
+		
 		visited.add(getCellAt(boardRow,boardCol));
 		findAllTargets(boardRow, boardCol, PathLength);
 	}
 
 	private void findAllTargets(int boardRow, int boardCol, int pathLength) {
 		Set<BoardCell> adj = getAdjList(boardRow, boardCol);
-
 
 		for(BoardCell cell : adj)
 		{
@@ -194,15 +195,15 @@ public class Board {
 				continue;
 			}
 
-			if(pathLength  == 1){
+			if(pathLength  == 1)
+			{
 				targets.add(cell);
-
 
 			}	
 			else
 			{
 				visited.add(cell);
-				findAllTargets(boardRow, boardCol, pathLength - 1);
+				findAllTargets(cell.row, cell.col, pathLength - 1);
 				visited.remove(cell);
 			}
 		}
