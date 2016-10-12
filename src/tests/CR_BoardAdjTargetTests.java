@@ -118,6 +118,7 @@ public class CR_BoardAdjTargetTests {
 	{
 		// Test on top edge of board, just one walkway piece
 		Set<BoardCell> testList = board.getAdjList(0, 4);
+		//System.out.println(testList);
 		assertTrue(testList.contains(board.getCellAt(0, 5)));
 		assertEquals(1, testList.size());
 		
@@ -143,7 +144,12 @@ public class CR_BoardAdjTargetTests {
 		assertEquals(4, testList.size());
 		
 		// Test on bottom edge of board, next to 1 room piece
+
+		System.out.println(board.getCellAt(21,15));
+		
 		testList = board.getAdjList(21, 15);
+		
+		
 		assertTrue(testList.contains(board.getCellAt(21, 16)));
 		assertTrue(testList.contains(board.getCellAt(20, 15)));
 		assertEquals(2, testList.size());

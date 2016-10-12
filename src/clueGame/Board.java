@@ -12,7 +12,7 @@ public class Board {
 	public Set<BoardCell> targets;
 	public String boardConfigFile;
 	public String roomConfigFile;
-	
+
 	private boolean properRoomConfig = false;
 	private Set<BoardCell> visited;
 	private BoardCell[][] grid;		//CHANGE TO PRIVATE
@@ -20,13 +20,13 @@ public class Board {
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
-	
+
 	// ctor is private to ensure only one can be created
 	private Board() 
 	{
-		
+
 	}
-	
+
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
@@ -37,7 +37,7 @@ public class Board {
 		grid = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 		visited = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
-		
+
 		try 
 		{
 			properRoomConfig = true;
@@ -46,8 +46,8 @@ public class Board {
 		catch (Exception e) {
 			System.out.println(e);
 		}
-		
-		
+
+
 		try 
 		{
 			loadBoardConfig();
@@ -55,8 +55,8 @@ public class Board {
 		catch (Exception e) {
 			System.out.println(e);
 		}
-		
-		
+
+
 	}
 
 	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException
@@ -65,20 +65,20 @@ public class Board {
 		{
 			throw new BadConfigFormatException("Room already loaded");
 		}
-		
+
 		FileReader fr = new FileReader(roomConfigFile);
 		Scanner input = new Scanner(fr).useDelimiter(", ");
-		
+
 		while(input.hasNext())
 		{
 			char c = input.next().charAt(0);
 			String name = input.next();
-		
+
 			rooms.put(c,name);
-			
+
 			input.nextLine();
 		}
-		
+
 	}
 
 	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException
@@ -86,14 +86,14 @@ public class Board {
 		FileReader fr = new FileReader(boardConfigFile);
 		Scanner inputrow = new Scanner(fr);
 		Scanner inputcol;
-		
+
 		int row = 0;
 		while(inputrow.hasNextLine())
 		{
-	
+
 			int column = 0;
 			inputcol = new Scanner(inputrow.nextLine()).useDelimiter(",");
-			
+
 			while(inputcol.hasNext())
 			{
 				String s = inputcol.next();
@@ -102,21 +102,21 @@ public class Board {
 				{
 					d = s.charAt(1);
 				}
-				
+
 				BoardCell bc = new BoardCell(row,column, s.charAt(0), d);
-				
+
 				grid[row][column]= bc;
 				column++;
 			}
-			
+
 			if(numColumns == 0)
 			{
 				numColumns = column;
 			}
 			row++;
 		}
-		
-		
+
+
 		numRows = row;
 		inputrow.close();
 	}
@@ -124,32 +124,48 @@ public class Board {
 
 	public Set<BoardCell> getAdjList(int boardRow, int boardCol) {
 		BoardCell cell = getCellAt(boardRow, boardCol);
-		
+
 		Set<BoardCell> output = new HashSet<BoardCell> ();
 
 		if(cell.row > 0)
 		{
-			output.add(grid[cell.row - 1][cell.col]);
+			if(grid[cell.row -1][cell.col].getInitial() == 'W' ||
+					grid[cell.row -1][cell.col].dir == DoorDirection.DOWN)
+			{
+				output.add(grid[cell.row - 1][cell.col]);
+			}
 		}
 
 		if(cell.row < grid.length - 1)
 		{
-			output.add(grid[cell.row + 1][cell.col]);
+			if(grid[cell.row +1][cell.col].getInitial() == 'W' ||
+					grid[cell.row +1][cell.col].dir == DoorDirection.UP)
+			{
+				output.add(grid[cell.row + 1][cell.col]);
+			}
 		}
 
 		if(cell.col > 0)
 		{
-			output.add(grid[cell.row][cell.col - 1]);
+			if(grid[cell.row][cell.col-1].getInitial() == 'W' ||
+					grid[cell.row][cell.col-1].dir == DoorDirection.RIGHT)
+			{
+				output.add(grid[cell.row][cell.col - 1]);
+			}
 		}
 
 		if(cell.col < grid[0].length - 1)
 		{
-			output.add(grid[cell.row][cell.col + 1]);
+			if(grid[cell.row][cell.col + 1].getInitial() == 'W' ||
+					grid[cell.row][cell.col + 1].dir == DoorDirection.LEFT)
+			{
+				output.add(grid[cell.row][cell.col + 1]);
+			}
 		}
 
 		return output;
 	}
-	
+
 	public void calcTargets(int boardRow, int boardCol, int PathLength)
 	{	
 		visited.clear();
@@ -159,6 +175,8 @@ public class Board {
 
 	private void findAllTargets(int boardRow, int boardCol, int pathLength) {
 		Set<BoardCell> adj = getAdjList(boardRow, boardCol);
+
+
 		for(BoardCell cell : adj)
 		{
 			if(visited.contains(cell))
@@ -167,8 +185,8 @@ public class Board {
 			}
 
 			if(pathLength  == 1){
-
 				targets.add(cell);
+
 
 			}	
 			else
@@ -179,6 +197,7 @@ public class Board {
 			}
 		}
 	}
+	
 	public void setConfigFiles(String inputboard, String inputroom) {
 		boardConfigFile = inputboard;
 		roomConfigFile = inputroom;
@@ -205,6 +224,7 @@ public class Board {
 	{
 		return targets;
 	}
-	
+
+
 
 }

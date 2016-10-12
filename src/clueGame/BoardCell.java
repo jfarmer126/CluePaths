@@ -99,6 +99,10 @@ public class BoardCell {
 		case 'L':
 			dir = DoorDirection.LEFT;
 			break;
+		default:
+			dir = DoorDirection.NONE;
+			break;
+				
 		}
 	}
 
