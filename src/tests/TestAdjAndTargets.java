@@ -20,6 +20,8 @@ public class TestAdjAndTargets {
 		board.initialize();
 	}
 	
+	
+	//Purple
 	//Locations with only walkways as adjacent locations
 	@Test
 	public void testAdjacencyWalkways(){
@@ -27,15 +29,18 @@ public class TestAdjAndTargets {
 		Set<BoardCell> testList = board.getAdjList(21, 5);
 		assertTrue(testList.contains(board.getCellAt(20, 5)));
 		
+		
 		//with three walkway pieces
-		testList = board.getAdjList(5, 0);
-		assertTrue(testList.contains(board.getCellAt(4,0)));
-		assertTrue(testList.contains(board.getCellAt(6,0)));
-		assertTrue(testList.contains(board.getCellAt(5,1)));
+		testList = board.getAdjList(12, 0);
+		
+		assertTrue(testList.contains(board.getCellAt(12,1)));
+		assertTrue(testList.contains(board.getCellAt(13,0)));
 		
 		
 	}
 	
+	
+	//Blue
 	//Locations that are at each edge of the board
 	@Test
 	public void testEdgePieces(){
@@ -63,6 +68,8 @@ public class TestAdjAndTargets {
 		assertTrue(testList.contains(board.getCellAt(1, 12)));
 	}
 	
+	
+	//Green
 	//test locations that are beside a room cell that's not a doorway
 	@Test
 	public void testAdjacencyRoom(){
@@ -76,6 +83,7 @@ public class TestAdjAndTargets {
 	}
 	
 	
+	//Yellow
 	//test locations that are adjacent to a doorway with the direction
 	@Test
 	public void testAdjacencyDoorways(){
@@ -108,6 +116,8 @@ public class TestAdjAndTargets {
 		assertTrue(testList.contains(board.getCellAt(9, 16)));
 	}
 	
+	
+	//Orange
 	@Test
 	public void testDoorways(){
 		//Test UP
@@ -135,7 +145,7 @@ public class TestAdjAndTargets {
 	
 	
 	
-	
+	//Maroon
 	//Target test for one pathlength away
 	@Test
 	public void testOnePathLength() {
@@ -157,6 +167,7 @@ public class TestAdjAndTargets {
 	}
 	
 	
+	//Maroon
 	//Target test for two pathlength away
 	@Test
 	public void testTwoPathLength() {
@@ -182,6 +193,7 @@ public class TestAdjAndTargets {
 	}
 	
 	
+	//Maroon
 	//Target test for four pathlength away
 	@Test
 	public void testFourPathLength() {
@@ -217,6 +229,7 @@ public class TestAdjAndTargets {
 		
 	}	
 	
+	//Maroon
 	//Target test for six pathlength away
 	@Test
 	public void testSixPathLength() {
@@ -240,41 +253,43 @@ public class TestAdjAndTargets {
 	}	
 	
 	
-	
+		//Red
 		//Target Test for Entering Room
 		@Test 
 		public void testEnteringRoom()
 		{
-			board.calcTargets(13,2,2);
+			board.calcTargets(15,20,2);
 			Set<BoardCell> targets= board.getTargets();
 			
-			assertEquals(5, targets.size());
-			assertTrue(targets.contains(board.getCellAt(12,3)));
-			assertTrue(targets.contains(board.getCellAt(13,4)));
-			assertTrue(targets.contains(board.getCellAt(12,1)));
-			assertTrue(targets.contains(board.getCellAt(14,2))); //door
-			assertTrue(targets.contains(board.getCellAt(13,0)));
+			assertEquals(6, targets.size());
+			assertTrue(targets.contains(board.getCellAt(13,20)));
+			assertTrue(targets.contains(board.getCellAt(14,21)));
+			assertTrue(targets.contains(board.getCellAt(15,22)));
+			assertTrue(targets.contains(board.getCellAt(14,19)));
+			assertTrue(targets.contains(board.getCellAt(16,20))); //door
+			assertTrue(targets.contains(board.getCellAt(15,18)));
+			
 		}
 		
-		
+		//Dark Grey
 		//Target Test for Exiting Room
 		@Test
 		public void testExitingRoom()
 		{
-			board.calcTargets(14, 2, 1);
+			board.calcTargets(14, 9, 1);
 			Set<BoardCell> targets= board.getTargets();
 			
 			assertEquals(1, targets.size());
-			assertTrue(targets.contains(board.getCellAt(13, 2)));
+			assertTrue(targets.contains(board.getCellAt(13, 9)));
 			
 			
-			board.calcTargets(14, 2, 2);
+			board.calcTargets(16, 20, 2);
 			targets= board.getTargets();
 			
 			assertEquals(3, targets.size());
-			assertTrue(targets.contains(board.getCellAt(12,2)));
-			assertTrue(targets.contains(board.getCellAt(13,3)));
-			assertTrue(targets.contains(board.getCellAt(13,1)));
+			assertTrue(targets.contains(board.getCellAt(14,20)));
+			assertTrue(targets.contains(board.getCellAt(15,21)));
+			assertTrue(targets.contains(board.getCellAt(15,19)));
 		}
 
 }
